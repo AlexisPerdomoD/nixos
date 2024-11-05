@@ -2,10 +2,10 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, input, ... }:
+{ config, lib, inputs, ... }:
 let
-  unstablePkgs = input.unstableNixPkgs.legacyPackages.x86_64-linux;
-  pkgs = input.nixpkgs.legacyPackages.x86_64-linux;
+  unstablePkgs = inputs.unstableNixPkgs.legacyPackages.x86_64-linux;
+  pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
 in
 {
   imports =
@@ -204,7 +204,7 @@ in
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
-  system.copySystemConfiguration = true;
+  #  system.copySystemConfiguration = true;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
