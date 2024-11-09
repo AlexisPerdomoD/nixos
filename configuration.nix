@@ -1,10 +1,9 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
+# Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { config, lib, inputs, ... }:
 let
-  unstablePkgs = inputs.unstableNixPkgs.legacyPackages.x86_64-linux;
+  UnstablePkgs = inputs.unstableNixPkgs.legacyPackages.x86_64-linux;
   pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
 in
 {
@@ -16,6 +15,8 @@ in
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = false;
+
+  boot.initrd.kernelModules = [ "amdgpu" ];
   boot.loader = {
     efi.canTouchEfiVariables = true;
     grub = {
@@ -49,14 +50,9 @@ in
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
-
-
-
-
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
@@ -83,7 +79,7 @@ in
   };
   users.users.sixela = {
     isNormalUser = true;
-    shell = unstablePkgs.zsh;
+    shell = UnstablePkgs.zsh;
     home = "/home/sixela";
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
@@ -96,67 +92,72 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 
-  environment.systemPackages = [
-    pkgs.pavucontrol # audio mixer
-    pkgs.chromium
-    pkgs.file
-    pkgs.ranger
-    pkgs.git
-    pkgs.fzf
-    pkgs.bat
+  environment.systemPackages = with pkgs; [
+    gnome.nautilus
+    pavucontrol # audio mixer
+    chromium
+    file
+    ranger
+    git
+    fzf
+    bat
     # zsh enviroment
-    unstablePkgs.alacritty
-    pkgs.kitty
-    unstablePkgs.starship
-    pkgs.fastfetch
-    pkgs.wget
-    pkgs.curl
-    pkgs.zellij
-    pkgs.unzip
-    pkgs.gnumake
+    UnstablePkgs.alacritty
+    kitty
+    UnstablePkgs.starship
+    fastfetch
+    wget
+    curl
+    zellij
+    unzip
+    gnumake
     # lenguajes requeridos por el sistema nvim
-    unstablePkgs.neovim
-    pkgs.xclip
-    pkgs.wl-clipboard
-    pkgs.cargo
-    pkgs.lua
-    pkgs.lua-language-server
-    pkgs.stylua
-    pkgs.go
-    pkgs.gcc
-    pkgs.nodejs
-    pkgs.prettierd
-    pkgs.python3
-    pkgs.dotnet-sdk
+    UnstablePkgs.neovim
+    xclip
+    wl-clipboard
+    cargo
+    lua
+    lua-language-server
+    stylua
+    go
+    gcc
+    nodejs
+    prettierd
+    python3
+    dotnet-sdk
     # Nix language sudo text editing setup
-    pkgs.nixd
-    pkgs.nixpkgs-fmt
+    nixd
+    nixpkgs-fmt
     # para hyprland
-    pkgs.hyprpaper
-    pkgs.hyprshot # para capturar pantalla
-    pkgs.slurp # para capturar pantalla 
-    pkgs.wf-recorder # para grabar pantalla
-    pkgs.waybar
-    pkgs.wofi
-    (pkgs.waybar.overrideAttrs (oldAttrs: {
+    hyprpaper
+    hyprshot # para capturar pantalla
+    slurp # para capturar pantalla 
+    wf-recorder # para grabar pantalla
+    waybar
+    wofi
+    (waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     })
     )
-    pkgs.mako # notification deamon
-    pkgs.libnotify # notification platform
+    mako # notification deamon
+    libnotify # notification platform
   ];
-
+  console = {
+    earlySetup = true;
+    # font = "ter-v12n";
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-u12n.psf.gz";
+    packages = with pkgs; [ terminus_font ];
+  };
   fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "Agave" ]; })
     (nerdfonts.override { fonts = [ "Iosevka" ]; })
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-    source-code-pro
   ];
   fonts.fontconfig = {
     defaultFonts = {
       serif = [ "Iosevka" ];
       sansSerif = [ "DejaVu Sans" ];
-      monospace = [ "Source Code Pro" ];
+      monospace = [ "Jetbrains Mono" ];
     };
   };
 
@@ -191,14 +192,6 @@ in
     bluetooth.powerOnBoot = true;
     bluetooth.settings.General.Experimental = true;
   };
-
-
-
-
-
-
-
-
 
 
   # Copy the NixOS configuration file and link it from the resulting system
