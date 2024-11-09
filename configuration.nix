@@ -15,23 +15,36 @@ in
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = false;
-
+  boot.postBootCommands = ''
+    kbdrate -r 50 -d 140
+  '';
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.loader = {
     efi.canTouchEfiVariables = true;
     grub = {
       enable = true;
+      default = "saved";
       efiSupport = true;
       devices = [ "nodev" ];
       useOSProber = true;
     };
+    grub2-theme = {
+      enable = true;
+      theme = "vimix";
+      footer = true;
+      customResolution = "2560x1440";
+    };
+  };
+  console = {
+    earlySetup = true;
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-u14n.psf.gz";
+    packages = with pkgs; [ terminus_font ];
   };
   hardware.opengl.enable = true;
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
-
   # Set your time zone.
   time.timeZone = "America/Lima";
   services.ntp.enable = true; # sincroniza hora 
@@ -71,12 +84,20 @@ in
   programs = {
     zsh = {
       enable = true;
+      autosuggestions.enable = true;
+      enableBashCompletion = true;
+    };
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      package = UnstablePkgs.neovim-unwrapped;
     };
     hyprland = {
       enable = true;
       xwayland.enable = true;
     };
   };
+
   users.users.sixela = {
     isNormalUser = true;
     shell = UnstablePkgs.zsh;
@@ -112,7 +133,6 @@ in
     unzip
     gnumake
     # lenguajes requeridos por el sistema nvim
-    UnstablePkgs.neovim
     xclip
     wl-clipboard
     cargo
@@ -142,12 +162,8 @@ in
     mako # notification deamon
     libnotify # notification platform
   ];
-  console = {
-    earlySetup = true;
-    # font = "ter-v12n";
-    font = "${pkgs.terminus_font}/share/consolefonts/ter-u12n.psf.gz";
-    packages = with pkgs; [ terminus_font ];
-  };
+
+
   fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "Agave" ]; })
     (nerdfonts.override { fonts = [ "Iosevka" ]; })
