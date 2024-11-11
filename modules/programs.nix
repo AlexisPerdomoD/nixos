@@ -1,7 +1,7 @@
 { inputs, ... }:
 let
   UnstablePkgs = inputs.unstableNixPkgs.legacyPackages.x86_64-linux;
-  pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+  pkgs = import inputs.nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
 in
 {
 
@@ -9,11 +9,15 @@ in
     gnome.nautilus
     pavucontrol # audio mixer
     chromium
+    google-chrome
     file
     ranger
     git
     fzf
     bat
+    imv
+    notes
+    killall
     # zsh enviroment
     UnstablePkgs.alacritty
     UnstablePkgs.kitty
@@ -26,6 +30,8 @@ in
     gnumake
     xclip
     wl-clipboard
+    slack
+    telegram-desktop
     # lenguajes requeridos por el sistema nvim
     cargo
     lua
@@ -84,12 +90,26 @@ in
     enable = true;
     xwayland.enable = true;
   };
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-  };
+
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland ];
   };
+  # neovim setup as default
+  environment.etc."xdg/applications/nvim.desktop".text = ''
+    [Desktop Entry]
+    Name=Neovim
+    Exec=alacritty -e nvim %F  # Cambia `alacritty` si usas otro terminal
+    Terminal=true
+    Type=Application
+    MimeType=text/plain;
+  '';
 
+  environment.variables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+  };
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1"; # necesario para hyprland
+  };
 }
