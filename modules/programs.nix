@@ -15,10 +15,10 @@ in
     fzf
     bat
     # zsh enviroment
-    alacritty
-    kitty
+    UnstablePkgs.alacritty
+    UnstablePkgs.kitty
     UnstablePkgs.starship
-    fastfetch
+    UnstablePkgs.fastfetch
     wget
     curl
     zellij
