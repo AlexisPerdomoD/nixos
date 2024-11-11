@@ -53,6 +53,7 @@ in
     dotnet-aspnetcore_8
     csharpier
     csharp-ls
+    netcoredbg
     UnstablePkgs.emacsPackages.omnisharp
     # Nix language sudo text editing setup
     nixd
