@@ -5,13 +5,14 @@
 
 {
   imports = [
+    ./modules/network.nix
+    ./modules/services.nix
+    ./hardware-configuration.nix
     (import ./modules/settings.nix { inherit config inputs; })
     (import ./modules/programs.nix { inherit config inputs; })
     (import ./modules/users.nix { inherit config inputs; })
 
-    ./modules/network.nix
-    ./modules/services.nix
-    ./hardware-configuration.nix
+
   ];
   #  modules.enable = true;
   # Copy the NixOS configuration file and link it from the resulting system

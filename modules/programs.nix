@@ -18,15 +18,15 @@ in
     UnstablePkgs.alacritty
     UnstablePkgs.kitty
     UnstablePkgs.starship
-    UnstablePkgs.fastfetch
+    fastfetch
     wget
     curl
     zellij
     unzip
     gnumake
-    # lenguajes requeridos por el sistema nvim
     xclip
     wl-clipboard
+    # lenguajes requeridos por el sistema nvim
     cargo
     lua
     lua-language-server
@@ -36,7 +36,18 @@ in
     nodejs
     prettierd
     python3
-    dotnet-sdk
+    # dotnet-sdk
+    # dotnet-sdk_7
+    dotnet-sdk_8
+    # dotnet-runtime
+    # dotnet-runtime_7
+    dotnet-runtime_8
+    # dotnet-aspnetcore
+    # dotnet-aspnetcore_7
+    dotnet-aspnetcore_8
+    csharpier
+    csharp-ls
+    UnstablePkgs.emacsPackages.omnisharp
     # Nix language sudo text editing setup
     nixd
     nixpkgs-fmt
