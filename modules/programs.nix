@@ -8,7 +8,6 @@ in
   environment.systemPackages = with pkgs; [
     gnome.nautilus
     pavucontrol # audio mixer
-    chromium
     google-chrome
     file
     ranger
@@ -18,6 +17,7 @@ in
     imv
     notes
     killall
+    vlc
     # zsh enviroment
     UnstablePkgs.alacritty
     UnstablePkgs.kitty
@@ -69,8 +69,7 @@ in
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     })
     )
-    mako # notification deamon
-    libnotify # notification platform
+    UnstablePkgs.libnotify # notification platform
   ];
 
   programs = {
