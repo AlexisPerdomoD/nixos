@@ -52,9 +52,9 @@ in
     # dotnet-aspnetcore_7
     dotnet-aspnetcore_8
     csharpier
-    csharp-ls
+    # csharp-ls
     netcoredbg
-    UnstablePkgs.emacsPackages.omnisharp
+    omnisharp-roslyn
     # Nix language sudo text editing setup
     nixd
     nixpkgs-fmt
@@ -69,6 +69,7 @@ in
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     })
     )
+    mako
     UnstablePkgs.libnotify # notification platform
   ];
 
