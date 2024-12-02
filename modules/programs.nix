@@ -33,6 +33,7 @@ in
     slack
     telegram-desktop
     # lenguajes requeridos por el sistema nvim
+    neovide
     cargo
     lua
     lua-language-server
