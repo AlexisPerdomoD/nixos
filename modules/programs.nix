@@ -43,8 +43,8 @@ in
     nodejs
     prettierd
     python3
-    # dotnet-sdk
-    # dotnet-sdk_7
+    dotnet-sdk
+    dotnet-sdk_7
     dotnet-sdk_8
     # dotnet-runtime
     # dotnet-runtime_7
