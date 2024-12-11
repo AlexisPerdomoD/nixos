@@ -18,6 +18,7 @@ in
     notes
     killall
     vlc
+    wpsoffice
     # zsh enviroment
     UnstablePkgs.alacritty
     UnstablePkgs.kitty
