@@ -31,6 +31,7 @@ in
     gnumake
     xclip
     wl-clipboard
+    insomnia
     slack
     telegram-desktop
     # lenguajes requeridos por el sistema nvim
