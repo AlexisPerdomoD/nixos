@@ -111,8 +111,8 @@ in
   '';
 
   environment.variables = {
-    EDITOR = "nvim";
-    VISUAL = "nvim";
+    EDITOR = "neovide";
+    VISUAL = "neovide";
   };
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1"; # necesario para hyprland
