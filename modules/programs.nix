@@ -36,6 +36,7 @@ in
     slack
     telegram-desktop
     # NVIM
+    neovide
     cargo
     lua
     lua-language-server
@@ -68,6 +69,10 @@ in
     libnotify
     # THEMING 
     arc-theme
+    gtk2
+    gtk3
+    gtk4
+    xorg.xrandr
     papirus-icon-theme
     lxappearance
     qt5ct

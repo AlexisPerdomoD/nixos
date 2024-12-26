@@ -47,7 +47,6 @@ in
     alsa.enable = true;
     alsa.support32Bit = true;
   };
-
   fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "Agave" ]; })
     (nerdfonts.override { fonts = [ "Iosevka" ]; })

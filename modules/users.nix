@@ -12,7 +12,6 @@ in
     packages = with pkgs; [
       firefox
       tree
-      spotube
     ];
   };
 
