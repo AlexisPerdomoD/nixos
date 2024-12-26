@@ -1,17 +1,19 @@
 { inputs, ... }:
 let
-  UnstablePkgs = inputs.unstableNixPkgs.legacyPackages.x86_64-linux;
+  unstablePkgs = inputs.unstableNixPkgs.legacyPackages.x86_64-linux;
   pkgs = import inputs.nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
 in
 {
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs;[
     gnome.nautilus
-    pavucontrol # audio mixer
+    lxqt.pavucontrol-qt
+    blueman
     google-chrome
     file
     ranger
     git
+    ripgrep
     fzf
     bat
     imv
@@ -19,10 +21,9 @@ in
     killall
     vlc
     wpsoffice
-    # zsh enviroment
-    UnstablePkgs.alacritty
-    UnstablePkgs.kitty
-    UnstablePkgs.starship
+    unstablePkgs.alacritty
+    unstablePkgs.kitty
+    starship
     fastfetch
     wget
     curl
@@ -34,8 +35,7 @@ in
     insomnia
     slack
     telegram-desktop
-    # lenguajes requeridos por el sistema nvim
-    neovide
+    # NVIM
     cargo
     lua
     lua-language-server
@@ -43,20 +43,10 @@ in
     go
     gcc
     nodejs
-    prettierd
     python3
-    # dotnet-sdk
-    # dotnet-sdk_7
-    # dotnet-sdk_8
-    # dotnet-runtime
-    # dotnet-runtime_7
-    # dotnet-runtime_8
-    # dotnet-aspnetcore
-    # dotnet-aspnetcore_7
-    # dotnet-aspnetcore_8
+    prettierd
     (with dotnetCorePackages; combinePackages [ sdk_6_0 sdk_7_0 sdk_8_0 sdk_9_0 ])
     csharpier
-    # csharp-ls
     netcoredbg
     omnisharp-roslyn
     # Nix language sudo text editing setup
@@ -64,17 +54,23 @@ in
     nixpkgs-fmt
     # para hyprland
     hyprpaper
-    hyprshot # para capturar pantalla
-    slurp # para capturar pantalla 
-    wf-recorder # para grabar pantalla
+    hyprshot
+    slurp
+    wf-recorder
     waybar
     wofi
     (waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     })
     )
+    # notification platform
     mako
-    UnstablePkgs.libnotify # notification platform
+    libnotify
+    # THEMING 
+    arc-theme
+    papirus-icon-theme
+    lxappearance
+    qt5ct
   ];
 
   programs = {
@@ -85,10 +81,11 @@ in
     };
     neovim = {
       enable = true;
-      defaultEditor = true;
-      package = UnstablePkgs.neovim-unwrapped;
+      withNodeJs = true;
+      withPython3 = true;
+      withRuby = true;
+      package = unstablePkgs.neovim-unwrapped;
     };
-
   };
   # hyperland setup
   programs.hyprland = {
@@ -100,15 +97,6 @@ in
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland ];
   };
-  # neovim setup as default
-  environment.etc."xdg/applications/nvim.desktop".text = ''
-    [Desktop Entry]
-    Name=Neovim
-    Exec=alacritty -e nvim %F  # Cambia `alacritty` si usas otro terminal
-    Terminal=true
-    Type=Application
-    MimeType=text/plain;
-  '';
 
   environment.variables = {
     EDITOR = "neovide";
