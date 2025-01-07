@@ -36,23 +36,44 @@ in
     slack
     telegram-desktop
     # NVIM
+    lua-language-server
+    nodePackages.typescript-language-server
+    nodePackages.bash-language-server
+    vscode-langservers-extracted # JSON , css , html
+    omnisharp-roslyn
+    yaml-language-server
+    postgres-lsp
+    gopls
+    vim-language-server
+    nixd
+    sqls
+    csharp-ls
+    tailwindcss-language-server
     neovide
+    pnpm
+    python3
     cargo
     lua
-    lua-language-server
-    stylua
     go
     gcc
+    libstdcxx5
+    typescript
     nodejs
-    python3
+    htmlhint
+    eslint_d
+    stylua
+    shfmt
     prettierd
-    (with dotnetCorePackages; combinePackages [ sdk_6_0 sdk_7_0 sdk_8_0 sdk_9_0 ])
+    nixpkgs-fmt
+    # (with dotnetCorePackages; combinePackages [ sdk_6_0 sdk_7_0 sdk_8_0 sdk_9_0 ])
+    dotnet-sdk_8
+    dotnet-runtime_8
+    dotnet-aspnetcore_8
     csharpier
     netcoredbg
-    omnisharp-roslyn
+    # omnisharp-roslyn
     # Nix language sudo text editing setup
-    nixd
-    nixpkgs-fmt
+
     # para hyprland
     hyprpaper
     hyprshot
@@ -70,7 +91,7 @@ in
     # THEMING 
     arc-theme
     gtk2
-    gtk3
+    gtk3-x11
     gtk4
     xorg.xrandr
     papirus-icon-theme
@@ -91,13 +112,14 @@ in
       withRuby = true;
       package = unstablePkgs.neovim-unwrapped;
     };
-  };
-  # hyperland setup
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
+    # hyperland setup
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
 
+    hyprlock.enable = true;
+  };
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland ];

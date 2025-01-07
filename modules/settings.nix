@@ -59,5 +59,8 @@ in
       monospace = [ "Jetbrains Mono" ];
     };
   };
+  # gtk.enable = true;
+
+  qt.platformTheme = "qt5ct";
 
 }
