@@ -33,13 +33,16 @@ in
     xclip
     wl-clipboard
     insomnia
+    postman
     slack
     telegram-desktop
     # NVIM
     lua-language-server
+    unstablePkgs.postgres-lsp
     nodePackages.typescript-language-server
     nodePackages.bash-language-server
     vscode-langservers-extracted # JSON , css , html
+    marksman
     omnisharp-roslyn
     yaml-language-server
     postgres-lsp
@@ -65,13 +68,12 @@ in
     shfmt
     prettierd
     nixpkgs-fmt
-    # (with dotnetCorePackages; combinePackages [ sdk_6_0 sdk_7_0 sdk_8_0 sdk_9_0 ])
-    dotnet-sdk_8
-    dotnet-runtime_8
-    dotnet-aspnetcore_8
+    (with dotnetCorePackages; combinePackages [ sdk_6_0 sdk_7_0 sdk_8_0 sdk_9_0 ])
+    #dotnet-sdk_8
+    #dotnet-runtime_8
+    #dotnet-aspnetcore_8
     csharpier
     netcoredbg
-    # omnisharp-roslyn
     # Nix language sudo text editing setup
 
     # para hyprland
@@ -126,7 +128,7 @@ in
   };
 
   environment.variables = {
-    EDITOR = "neovide";
+    EDITOR = "nvim";
     VISUAL = "neovide";
   };
   environment.sessionVariables = {
