@@ -23,6 +23,7 @@ in
     wpsoffice
     unstablePkgs.alacritty
     unstablePkgs.kitty
+    unstablePkgs.ghostty
     starship
     fastfetch
     wget
@@ -41,8 +42,9 @@ in
     unstablePkgs.postgres-lsp
     nodePackages.typescript-language-server
     nodePackages.bash-language-server
-    vscode-langservers-extracted # JSON , css , html
+    vscode-langservers-extracted # JSON , css , html eslint
     marksman
+    markdown-oxide
     omnisharp-roslyn
     yaml-language-server
     postgres-lsp
@@ -54,6 +56,7 @@ in
     tailwindcss-language-server
     neovide
     pnpm
+    bun
     python3
     cargo
     lua
@@ -63,18 +66,13 @@ in
     typescript
     nodejs
     htmlhint
-    eslint_d
     stylua
     shfmt
     prettierd
     nixpkgs-fmt
     (with dotnetCorePackages; combinePackages [ sdk_6_0 sdk_7_0 sdk_8_0 sdk_9_0 ])
-    #dotnet-sdk_8
-    #dotnet-runtime_8
-    #dotnet-aspnetcore_8
     csharpier
     netcoredbg
-    # Nix language sudo text editing setup
 
     # para hyprland
     hyprpaper
@@ -129,7 +127,8 @@ in
 
   environment.variables = {
     EDITOR = "nvim";
-    VISUAL = "neovide";
+    VISUAL = "nvim";
+    GIT_EDITOR = "nvim";
   };
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1"; # necesario para hyprland
