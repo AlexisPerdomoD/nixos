@@ -51,12 +51,13 @@ in
     (nerdfonts.override { fonts = [ "Agave" ]; })
     (nerdfonts.override { fonts = [ "Iosevka" ]; })
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    (nerdfonts.override { fonts = [ "ProFont" ]; })
   ];
   fonts.fontconfig = {
     defaultFonts = {
       serif = [ "Iosevka" ];
       sansSerif = [ "DejaVu Sans" ];
-      monospace = [ "Jetbrains Mono" ];
+      monospace = [ "Jetbrains Mono Nerd Font" ];
     };
   };
   # gtk.enable = true;
