@@ -52,6 +52,7 @@ in
     (nerdfonts.override { fonts = [ "Iosevka" ]; })
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     (nerdfonts.override { fonts = [ "ProFont" ]; })
+    (nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
   ];
   fonts.fontconfig = {
     defaultFonts = {

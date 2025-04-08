@@ -29,6 +29,7 @@ in
     wget
     curl
     zellij
+    obsidian
     unzip
     gnumake
     xclip
